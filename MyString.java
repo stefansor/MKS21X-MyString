@@ -13,6 +13,22 @@ public class MyString implements CharSequence,Comparable<CharSequence>{
     }
     return str;
   }
+  public char charAt(int a){
+    return (char)this.data[a];
+  }
+  public int length(){
+    return this.data.length;
+  }
+  public String subSequence(int start, int finish){
+    String seq = "";
+    for(int k = start; k < finish; k++){
+      seq = seq + this.data.[k];
+    }
+  }
+
+
+
+
 
 
 
