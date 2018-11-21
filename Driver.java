@@ -1,5 +1,6 @@
 public class Driver{
   public static void main(String[] args){
-    System.out.println('a' + "");
+    MyString abba = new MyString();
+    abba.toString();
   }
 }
