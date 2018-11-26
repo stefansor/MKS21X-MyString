@@ -1,24 +1,17 @@
 public class MyString implements CharSequence,Comparable<CharSequence>{
-  private char[] data;
-
+  public char[] data;
+/*creates char[] representing all the chars in the CharSequence in MyString*/
   public MyString(CharSequence s){
     data = new char[s.length()];
     for(int i = 0; i < data.length; i++){
       data[i] = s.charAt(i);
     }
   }
-
+/*loops through data and adds to an empty string*/
   public String toString(MyString s){
-    String str = "";
-    if(this.data.length ==0){
-      return "";
-    }
-    for(int j = 0; j < this.data.length; j++){
-      str = str + this.data[j];
-    }
-    return str;
+    return this.data.toString();
   }
-
+/*just returns the char at the index in data catches IndexOutOfBoundsException*/
   public char charAt(int a){
     try{
       return this.data[a];
@@ -29,11 +22,12 @@ public class MyString implements CharSequence,Comparable<CharSequence>{
     }
     return this.data[a];
   }
-
+/*returns the length of data and thus the CharSequence*/
   public int length(){
     return this.data.length;
   }
-
+/*uses charAt to create another string that contains the chars from start inlcusive
+to end exclusive*/
   public String subSequence(int start, int finish){
     String seq = "";
     try{
@@ -47,9 +41,17 @@ public class MyString implements CharSequence,Comparable<CharSequence>{
     }
     return seq;
   }
-
+/*have yet not tested - comapres the lexigrapgical ordering of the chars
+and lengths*/
   public int compareTo(CharSequence s){
     try{
+      MyString ss = new MyString(s);
+      if(this.data.length > s.length()){
+        return 1;
+      }
+      if(this.data.length < s.length()){
+        return -1;
+      }
       for(int i = 0; i < this.data.length; i++){
         if(this.charAt(i) + 0 > s.charAt(i) + 0){
           return 1;
