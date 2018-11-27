@@ -43,6 +43,9 @@ and lengths*/
   public int compareTo(CharSequence s){
     MyString ss = new MyString(s);
     int len = 0;
+    if(this.data == null || ss.data == null){
+      throw new NullPointerException("Either of the values cannot be null");
+    }
     if(ss.length() > this.length()){
       len = this.length();
     }
