@@ -8,17 +8,17 @@ public class MyString implements CharSequence,Comparable<CharSequence>{
     }
   }
 /*loops through data and adds to an empty string*/
-  public String toString(MyString s){
-    return this.data.toString();
+  public String toString(){
+    String seq = "";
+    for(int h= 0; h < this.data.length; h++){
+      seq = seq + this.data[h];
+    }
+    return seq;
   }
 /*just returns the char at the index in data catches IndexOutOfBoundsException*/
   public char charAt(int a){
-    try{
-      return this.data[a];
-    }
-    catch(IndexOutOfBoundsException e){
-      System.out.println("Index is out of bounds");
-      System.exit(1);
+    if(a >= this.data.length || a < 0){
+      throw new IndexOutOfBoundsException("Invalid Index");
     }
     return this.data[a];
   }
@@ -28,51 +28,41 @@ public class MyString implements CharSequence,Comparable<CharSequence>{
   }
 /*uses charAt to create another string that contains the chars from start inlcusive
 to end exclusive*/
-  public String subSequence(int start, int finish){
+  public String subSequence(int start, int end){
     String seq = "";
-    try{
-      for(int k = start; k < finish; k++){
-        seq = seq + this.data[k];
-      }
+    if(start < 0 || start > this.data.length || end < 0 || end > this.data.length || start > end ){
+      throw new IndexOutOfBoundsException("Invalid start or finish");
     }
-    catch(IndexOutOfBoundsException e){
-      System.out.println("Index out of bounds");
-      System.exit(1);
+    for(int k = start; k < end; k++){
+      seq = seq + this.data[k];
     }
     return seq;
   }
 /*have yet not tested - comapres the lexigrapgical ordering of the chars
 and lengths*/
   public int compareTo(CharSequence s){
-    try{
-      MyString ss = new MyString(s);
-      if(this.data.length > s.length()){
+    MyString ss = new MyString(s);
+    int len = 0;
+    if(ss.length() > this.length()){
+      len = this.length();
+    }
+    else{
+      len = ss.length();
+    }
+    for(int i = 0; i < len; i++){
+      if(this.charAt(i) + 0 > s.charAt(i) + 0){
         return 1;
       }
-      if(this.data.length < s.length()){
+      if(this.charAt(i) + 0 < s.charAt(i) + 0){
         return -1;
       }
-      for(int i = 0; i < this.data.length; i++){
-        if(this.charAt(i) + 0 > s.charAt(i) + 0){
-          return 1;
-        }
-        if(this.charAt(i) + 0 < s.charAt(i) + 0){
-          return -1;
-        }
-      }
     }
-    catch(NullPointerException e){
-      System.out.println("Value cannot be null");
-      System.exit(1);
+    if(this.data.length > s.length()){
+      return 1;
     }
-    catch(ClassCastException e){
-      System.out.println("Objects cannot be compared");
-      System.exit(1);
+    if(this.data.length < s.length()){
+      return -1;
     }
     return 0;
   }
-
-
-
-
 }
